@@ -69,6 +69,7 @@ void PositionController::dump_config() {
 
 void PositionController::adjust() {
     if ( ! ( actual_position_->has_state() && target_position_->has_state()) ) {
+        ESP_LOGD("MOTOR", "Cannot find position states");
         return;
     }
 }
