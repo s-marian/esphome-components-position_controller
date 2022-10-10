@@ -39,8 +39,10 @@ void PositionController::loop() {
     double actual = actual_position_->get_state();
 
 
+    target += rotation_offset_;
+
     if ( target_position_offset_ != nullptr && target_position_offset_->has_state()) {
-      target = target + target_position_offset_->get_state();
+      target += target_position_offset_->get_state();
     }
 
     double err = target - actual;

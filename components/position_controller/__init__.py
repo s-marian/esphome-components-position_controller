@@ -20,6 +20,7 @@ CONF_TARGET_POSITION="target_position"
 CONF_ACCEL_UPDATE_FREQ="accel_update_frequency"
 CONF_ADJUSTMENT_THRESHOLD="adjustment_threshold"
 CONF_TARGET_POSITION_OFFSET="target_position_offset"
+CONF_ROTATION_OFFSET="rotation_offset"
 
 position_controller_ns = cg.esphome_ns.namespace("position_controller")
 PositionController = position_controller_ns.class_("PositionController", cg.Component)
@@ -35,6 +36,7 @@ CONFIG_SCHEMA = cv.All(
             cv.Required(CONF_PIN_A): cv.use_id(output.FloatOutput),
             cv.Required(CONF_PIN_B): cv.use_id(output.FloatOutput),
             cv.Optional(CONF_TARGET_POSITION_OFFSET): cv.use_id(sensor.Sensor),
+            cv.Optional(CONF_ROTATION_OFFSET): cv.angle,
         }
     ).extend(cv.COMPONENT_SCHEMA)
 )
@@ -59,5 +61,5 @@ async def to_code(config):
         target_position_offset = await cg.get_variable(config[CONF_TARGET_POSITION_OFFSET])
         cg.add(var.set_target_position_offset_sensor(target_position_offset))
 
-
-
+    if CONF_ROTATION_OFFSET in config:
+        cg.add(var.set_rotation_offset(config[CONF_ROTATION_OFFSET]))
