@@ -27,13 +27,14 @@ class PositionController : public Component {
   void set_accel_update_freq(double freq) { accel_update_freq_ = freq; }
   void set_adjustment_threshold(double thr) { adjustment_thr_ = thr; }
   void set_rotation_offset(double offset) { rotation_offset_ = offset; }
+  void set_disabled(bool val) { active_ = !val; }
 
   void set_pin_a(output::FloatOutput *pin_a) { pin_a_ = pin_a; }
   void set_pin_b(output::FloatOutput *pin_b) { pin_b_ = pin_b; }
 
  protected:
   bool initialized_{false};
-  bool active_{false};
+  bool active_{true};
   double accel_update_freq_;
   double adjustment_thr_;
   int cycle_;
