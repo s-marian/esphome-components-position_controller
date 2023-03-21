@@ -38,7 +38,10 @@ class PositionController : public Component {
   double accel_update_freq_;
   double adjustment_thr_;
   int cycle_;
+  int direction_;
+  float slow_start_;
   uint32_t last_update_;
+  uint32_t slow_start_update_;
   double rotation_offset_ {0};
   
   output::FloatOutput *pin_a_;
